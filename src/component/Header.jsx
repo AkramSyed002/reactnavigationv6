@@ -1,13 +1,23 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 
-const Header = ({ goBack = () => {}, title = "fskfjsd" }) => {
+const Header = ({ goBack, title }) => {
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={goBack}>
-        <Text>{goBack ? "Go Back" : null}</Text>
-      </TouchableOpacity>
-      <Text>{title}</Text>
+      {goBack && (
+        <TouchableOpacity
+          onPress={
+            !!goBack
+              ? goBack
+              : () => Alert.alert("fsfsdfsd", "default function hit")
+          }
+        >
+          <Text>GoBack</Text>
+        </TouchableOpacity>
+      )}
+      <Text style={{ marginHorizontal: "auto" }}>
+        {title || "Default Title"}
+      </Text>
     </View>
   );
 };
@@ -15,5 +25,12 @@ const Header = ({ goBack = () => {}, title = "fskfjsd" }) => {
 export default Header;
 
 const styles = StyleSheet.create({
-  headerContainer: { flex: 1, backgroundColor: "red" },
+  headerContainer: {
+    height: 42,
+    flex: 1,
+    backgroundColor: "red",
+    flexDirection: "row",
+    // justifyContent: "center",
+    alignItems: "center",
+  },
 });
