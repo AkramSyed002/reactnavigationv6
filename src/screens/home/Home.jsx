@@ -47,6 +47,7 @@ export default function Home({ navigation }) {
       <SafeAreaView>
         <Header title="Home" />
         <Text>Home</Text>
+        <Text onPress={() => navigation.openDrawer()}>Open Drawer</Text>
         <MyButton
           title="Go to product Detail Page"
           onPress={() =>

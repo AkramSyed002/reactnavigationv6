@@ -4,14 +4,27 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Explore, Home, Profile } from '../screens';
 import navigationStrings from '../constant/navigationStrings';
 import MainStack from './MainStack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import TabsRoutes from './TabsRoutes';
+import CustomDrawer from './../component/CustomDrawer';
+
+const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator screenOptions={{ headerShown: false }}>
+			{/* tabs  */}
+			<Drawer.Navigator screenOptions={{ headerShown: false }} drawerContent={(props) => <CustomDrawer {...props} />}>
+				<Drawer.Screen name={navigationStrings.HOME_SCREEN} component={TabsRoutes} />
+				<Drawer.Screen name={navigationStrings.PROFILE_SCREEN} component={Profile} />
+				{/* {MainStack(Stack)} */}
+			</Drawer.Navigator>
+
+			{/* bottom tabs */}
+			{/* <Stack.Navigator screenOptions={{ headerShown: false }}>
 				{MainStack(Stack)}
-			</Stack.Navigator>
+			</Stack.Navigator> */}
 			{/* <Stack.Navigator initialRouteName={navigationStrings.HOME_SCREEN}
 			// screenOptions={{ headerShown: false }}
 			>
